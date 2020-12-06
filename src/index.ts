@@ -1,83 +1,82 @@
-type Gender = "男"| "女";
-type User = {
-    name: string
-    gender: Gender
+enum Level {
+    level1,
+    level2,
+    level3
 }
 
-function sum(n1:number, n2:number):number;
-function sum(n1:string, n2:string):string;
-function sum(n1:string|number,n2:string|number):string|number {
-    if (typeof n1 === "string" && typeof n2 === "string"){
-        return n1 + n2;
-    }else if (typeof  n1 === "number" && typeof n2 === "number"){
-        return n1 * n2;
-    }
-    throw new Error("123");
+let l: Level;
+
+l = Level.level1;
+l = Level.level2;
+l = Level.level3;
+
+console.log(l);
+
+enum Gender {
+    male = "帅哥",
+    female = "美女"
 }
 
-console.log(sum(1,1));
-console.log(sum("1","1"));
-function users(g?:Gender):User[]{
-    return [
-        {
-            name: '123',
-            gender: "男"
-        },
-        {
-            name: '456',
-            gender: "女"
-        }
-    ]
+let g: Gender;
+
+g = Gender.male;
+g = Gender.female;
+
+console.log(g);
+
+enum Color {
+    heart = "♥",
+    spade = "♠",
+    club = "♣",
+    diamond = "♦"
 }
 
-console.log(users());
+enum Mark{
+    A = "A",
+    two = "2",
+    three = "3",
+    four = "4",
+    five = "5",
+    six = "6",
+    seven = "7",
+    eight = "8",
+    nine = "9",
+    ten = "10",
+    J = "J",
+    Q = "Q",
+    K = "K"
+}
 
-
-type Color = "♥"|"♠"|"♣"|"♦"
 type NormalCard = {
     color: Color
-    mark: number
+    mark: Mark
 }
 type Peck = NormalCard[];
 
-function createPeck():Peck{
-    const peck:Peck = [];
-    for (let i = 1;i <=13;i ++){
-        peck.push({
-            color: "♠",
-            mark: i
-        });
-        peck.push({
-            color: "♣",
-            mark: i
-        });
-        peck.push({
-            color: "♥",
-            mark: i
-        });
-        peck.push({
-            color: "♦",
-            mark: i
-        });
+function createPeck(): Peck {
+    const peck: Peck = [];
+    const marks = Object.values(Mark);
+    const colors = Object.values(Color);
+    for (const m of marks) {
+        for (const c of colors) {
+            peck.push({
+                color: c,
+                mark: m
+            });
+        }
     }
     return peck;
 }
 
-function  printPeck(peck:Peck){
-    let result = "\n";
-    for (const c of peck) {
-        const color = c.color;
-        const mark = c.mark;
-        if (mark === 11){
-            result += color + "J";
-        }else if (mark === 12){
-            result += color + "Q";
-        }else if (mark === 13){
-            result += color + "K";
-        }else{
-            result += color + mark;
+function printPeck(peck: Peck) {
+    let result = "";
+    let i = 0;
+    for (const {mark,color} of peck) {
+        result += color + mark + "\t";
+        if ((i+1)%6===0){
+            result += "\n";
         }
-        result += "\t";
+        i ++;
     }
     console.log(result);
 }
