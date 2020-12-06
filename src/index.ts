@@ -31,7 +31,7 @@ enum Color {
     diamond = "♦"
 }
 
-enum Mark{
+enum Mark {
     A = "A",
     two = "2",
     three = "3",
@@ -71,15 +71,34 @@ function createPeck(): Peck {
 function printPeck(peck: Peck) {
     let result = "";
     let i = 0;
-    for (const {mark,color} of peck) {
+    for (const {mark, color} of peck) {
         result += color + mark + "\t";
-        if ((i+1)%6===0){
+        if ((i + 1) % 6 === 0) {
             result += "\n";
         }
-        i ++;
+        i++;
     }
     console.log(result);
 }
 
 const peck = createPeck();
 printPeck(peck);
+
+enum Permisstion{
+    Read = 1, // 2^0
+    Write = 2, // 2^1
+    Create = 4,// 2^2
+    Delete = 8, // 2^3
+}
+
+let p:Permisstion = Permisstion.Read | Permisstion.Write;
+
+function hasPermisstion(target:Permisstion,per:Permisstion) {
+    return (target & per) === per;
+}
+
+console.log(hasPermisstion(p,Permisstion.Write));
+
+p = p ^ Permisstion.Write;
+
+console.log(hasPermisstion(p,Permisstion.Write));
