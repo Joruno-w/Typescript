@@ -4,7 +4,12 @@
     "target":  "es2016",
     "lib": ["es2016"],
     "outDir": "./dist",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "noImplicitUseStrict": true,
+    "moduleResolution": "Node"
   },
   "include": ["./src"]
 }

@@ -4,7 +4,8 @@
   "description": "JavaScript的超集，可选的，静态的类型检查系统",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src -e ts --exec ts-node ./src/index.ts"
+    "dev": "nodemon --watch src -e ts --exec ts-node ./src/index.ts",
+    "build": "rd /s /q dist & tsc"
   },
   "repository": {
     "type": "git",
