@@ -1,5 +1,5 @@
 import {Color, Mark} from "./enum";
-import {Peck} from "./types";
+import {Card, Joker,Peck} from "./types";
 
 export function createPeck(): Peck {
     const peck: Peck = [];
@@ -9,18 +9,29 @@ export function createPeck(): Peck {
         for (const c of colors) {
             peck.push({
                 color: c,
-                mark: m
-            });
+                mark: m,
+                getString: () => c + m,
+            } as Card);
         }
     }
+    let joker:Joker = {
+        type: "big",
+        getString: () => "jo"
+    }
+    peck.push(joker);
+    joker = {
+        type: "small",
+        getString: () => "Jo"
+    }
+    peck.push(joker);
     return peck;
 }
 
 export function printPeck(peck: Peck) {
     let result = "";
     let i = 0;
-    for (const {mark,color} of peck) {
-        result += color + mark + "\t";
+    for (const p of peck) {
+        result += p.getString() + "\t";
         if ((i+1)%6===0){
             result += "\n";
         }
